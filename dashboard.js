@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function setProfileImages() {
     document.querySelectorAll('[id="profile-pic"]').forEach((img) => {
       img.src = `${BASE_URL}/user/profile-image/${userId}`;
-console.log(img.src.imageUrl)
+console.log(img.src[0].imageUrl)
       img.onerror = () => {
         img.src =
           "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/person.svg";
@@ -166,6 +166,7 @@ console.log(img.src.imageUrl)
   setupEditTodoHandler();
   setupDeleteTodoHandler();
 });
+
 
 
 
