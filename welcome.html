@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Welcome!</title>
+       
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcome-title">Welcome!</h1>
+        <p id="welcome-message">Loading message...</p>
+        <a href="http://127.0.0.1:5500/login.html" class="button" id="action-button" style="display: none;">Go to Login</a>
+    </div>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: white;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #005ba5cb;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 2.2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin: 20px 0;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #fff;
+            color: #005AA5;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+
+        const title   = document.getElementById('welcome-title');
+        const message = document.getElementById('welcome-message');
+        const button  = document.getElementById('action-button');
+
+        switch (status) {
+        case 'success':
+            title.textContent = "Email Verified!";
+            message.textContent = "Your email has been successfully verified. You can now log in to your account.";
+            button.style.display = 'inline-block';
+            break;
+        case 'not_found':
+            title.textContent = "Verification Failed";
+            message.textContent = "We couldn't find your email verification record. Please try registering again.";
+            break;
+        case 'failed':
+            title.textContent = "Verification Failed";
+            message.textContent = "Missing user information. Please try again.";
+            break;
+        case 'error':
+            title.textContent = "Something Went Wrong";
+            message.textContent = "An internal server error occurred. Please try again later.";
+            break;
+        default:
+            title.textContent = "Welcome!";
+            message.textContent = "Thank you for visiting our app.";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <form id="registerForm">
+      <h2 style="color: #005aa5">Register</h2>
+      <h5 id="error"></h5>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" />
+
+        <label for="middlename">Middle Name:</label>
+        <input type="text" id="middleName" name="middleName" />
+
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+
+        <label for="birthday">Birthdate:</label>
+        <input type="date" id="birthday" name="birthday" />
+
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" />
+      </div>
+      <button type="submit">Register</button>
+      <p>Already have an account? <a href="login.html">Login Here.</a>.</p>
+    </form>
+    <script>
+      const registerForm = document.getElementById("registerForm");
+
+      if (registerForm) {
+        registerForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(registerForm);
+          const roleType = "USER"
+
+          formData.append("roleType", roleType);
+
+          try {
+            const response = await fetch(
+              "https://web-production-1de00.up.railway.app/api/user/register",
+              {
+                method: "POST",
+                body: formData,
+              }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+              window.location.href = "login.html";
+              alert("Registration successful!");
+            } else {
+              document.getElementById("error").textContent =
+                result.message || "Registration failed.";
+            }
+          } catch (parseError) {
+            document.getElementById("error").textContent =
+              "Invalid response from server.";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
