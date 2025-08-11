@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${todo.id}</td>
-          <td>${todo.userId}</td>
+          <td>${todo.user_id}</td>
           <td ${editable ? 'contenteditable="true"' : ""}>${todo.title}</td>
           <td ${editable ? 'contenteditable="true"' : ""}>${
           todo.completed ? "Yes" : "No"
@@ -165,3 +165,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEditTodoHandler();
   setupDeleteTodoHandler();
 });
+
