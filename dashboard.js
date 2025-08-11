@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setProfileImages() {
-    const res = await fetch(`${BASE_URL}/user/profile-image/${userId}`, {
+    const res = fetch(`${BASE_URL}/user/profile-image/${userId}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -170,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEditTodoHandler();
   setupDeleteTodoHandler();
 });
+
 
 
 
