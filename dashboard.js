@@ -26,20 +26,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function setProfileImages() {
-    const res = fetch(`${BASE_URL}/user/profile-image/${userId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    document.querySelectorAll('[id="profile-pic"]').forEach((img) => {
-      img.src = res.imageUrl;
+async function setProfileImages() {
+  try {
+    const res = await fetch(`${BASE_URL}/user/profile-image/${userId}`);
+    const data = await res.json();
+    const imageUrl = data.imageUrl;
+
+    document.querySelectorAll('#profile-pic').forEach((img) => {
+      img.src = imageUrl;
       img.onerror = () => {
-        img.src =
-          "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/person.svg";
+        img.src = "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/person.svg";
       };
     });
+  } catch (err) {
+    console.error("Error loading profile image", err);
   }
+}
 
   function renderTodos(todos) {
     const listConfigs = [
@@ -170,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEditTodoHandler();
   setupDeleteTodoHandler();
 });
+
 
 
 
